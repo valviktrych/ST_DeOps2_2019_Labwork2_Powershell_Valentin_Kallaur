@@ -4,13 +4,11 @@
 Get-Variable
 #Видим, что числовые значения содержаться только в столбце Value. Хотя проверку нужно делать по всем элементам коллекции переменных текущего сеанса PowerShell..
 
-#5.2 
-
-$Arr = @()
-Get-Variable | Select-Object Value | Where-Object {$_.Value -is [int]} | 
-foreach {$Arr = $_.Value}
-$Arr
-
-$x = @(1, 2, 3, 4)
-$x | foreach {$summ += $_}
-$summ
+#5.2 Суммируем
+$sum = 0
+foreach ($_ in $V = Get-Variable | Select-Object Value | Where-Object {$_.Value -is [int]} ) {
+    
+    $sum += $_.Value
+    
+}
+Write-Host("Total sum: $sum")
